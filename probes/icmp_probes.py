@@ -151,14 +151,14 @@ def timestamp_probe(target, timeout=2):
 # ---------------------------------------------------------------------------
 def rate_limit_test(target, count=6, timeout=1):
     result = {
-        "probe_type": "ICMP_RATE_LIMIT",
-        "sent": count,
-        "received": 0,
-        "loss_percent": None,
-        "avg_rtt_ms": None,
-        "verdict": "unknown",
-        "response_summary": "",
-    }
+    "probe_type": "ICMP_RATE_LIMIT",
+    "probes_sent": count,
+    "responses_received": 0,
+    "loss_percent": None,
+    "avg_rtt_ms": None,
+    "verdict": "unknown",
+    "response_summary": "",
+}
 
     rtts = []
     received = 0
@@ -179,7 +179,7 @@ def rate_limit_test(target, count=6, timeout=1):
 
         time.sleep(0.1)
 
-    result["received"] = received
+    result["responses_received"] = received
     result["loss_percent"] = round(((count - received) / count) * 100, 2)
 
     if rtts:

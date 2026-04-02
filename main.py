@@ -33,7 +33,7 @@ from probes.fingerprint import (fingerprint_os, analyze_ipid_entropy,
 from analysis.analyzer  import analyze
 from analysis.scorer    import calculate_score, generate_mitigations
 from reporter.generator import generate
-
+from reporter.pdf_report import generate_pdf_report
 conf.verb = 0
 
 
@@ -97,6 +97,7 @@ def run_malformed_probes(target, ports, timeout):
     _status(f"[XMAS] {xmas_resp}/{len(test_ports)} ports responded")
 
     return null_results, fin_results, xmas_results
+
 
 
 # -----------------------------------------------------------------------
@@ -239,6 +240,22 @@ def main():
     print("  Analysis complete.")
     print(f"{'#'*60}\n")
 
+tcp_results = {
+    "SYN Probe": syn_result,
+    "ACK Probe": ack_result,
+    "NULL Probe": null_result,
+    "FIN Probe": fin_result,
+    "XMAS Probe": xmas_result,
+    "ISN Entropy": isn_analysis,
+    "SYN Cookie Detection": syn_cookie_result,
+}
+
+icmp_results = {
+    "Echo Probe": echo_result,
+    "Timestamp Probe": timestamp_result,
+    "Rate Limit Test": rate_limit_result,
+    "Repeated Echo Analysis": repeated_echo_result,
+}
 
 if __name__ == "__main__":
     main()
