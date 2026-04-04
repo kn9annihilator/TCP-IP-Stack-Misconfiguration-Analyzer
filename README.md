@@ -7,7 +7,6 @@
 ![Status](https://img.shields.io/badge/Status-Active%20Development-orange?style=flat-square)
 
 > **Research Project** — Analysis of TCP/IP Stack Misconfigurations and Their Security Implications  
-> B.Tech CSE (Cyber Security & Digital Forensics) | Sharda University
 
 A custom active probing tool that analyzes TCP/IP stack–level misconfigurations and abnormal protocol behaviors in networked systems. The tool assesses reconnaissance feasibility, OS fingerprinting potential, and denial-of-service susceptibility purely from protocol behavior — **no exploits, no CVEs required**.
 
