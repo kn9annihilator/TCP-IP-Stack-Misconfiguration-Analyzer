@@ -236,26 +236,43 @@ def main():
     _status(f"JSON → {json_path}")
     _status(f"TXT  → {txt_path}")
 
+    # Build dictionaries for PDF Report
+    tcp_results_dict = {
+        "SYN Probes": syn_results,
+        "ACK Probes": ack_results,
+        "NULL Probes": null_results,
+        "FIN Probes": fin_results,
+        "XMAS Probes": xmas_results,
+        "ISN Entropy": isn_analysis,
+        "SYN Cookie Detection": syn_cookie,
+    }
+
+    icmp_results_dict = {
+        "Echo Probe": icmp_echo,
+        "Timestamp Probe": icmp_timestamp,
+        "Rate Limit Test": icmp_rate_limit,
+        "Repeated Echo Analysis": repeated_icmp,
+    }
+
+    fingerprint_results_dict = {
+        "OS Fingerprint": os_fingerprint,
+        "IPID Analysis": ipid_analysis,
+        "TCP Options": tcp_options_analysis,
+    }
+
+    pdf_path = generate_pdf_report(
+        target=target,
+        tcp_results=tcp_results_dict,
+        icmp_results=icmp_results_dict,
+        fingerprint_results=fingerprint_results_dict,
+        analysis=analysis,
+        score_data=score_data,
+    )
+    _status(f"PDF  → {pdf_path}")
+
     print(f"\n{'#'*60}")
     print("  Analysis complete.")
     print(f"{'#'*60}\n")
-
-tcp_results = {
-    "SYN Probe": syn_result,
-    "ACK Probe": ack_result,
-    "NULL Probe": null_result,
-    "FIN Probe": fin_result,
-    "XMAS Probe": xmas_result,
-    "ISN Entropy": isn_analysis,
-    "SYN Cookie Detection": syn_cookie_result,
-}
-
-icmp_results = {
-    "Echo Probe": echo_result,
-    "Timestamp Probe": timestamp_result,
-    "Rate Limit Test": rate_limit_result,
-    "Repeated Echo Analysis": repeated_echo_result,
-}
 
 if __name__ == "__main__":
     main()

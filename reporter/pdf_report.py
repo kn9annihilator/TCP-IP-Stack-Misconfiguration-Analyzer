@@ -70,6 +70,11 @@ def _draw_page_border(canvas, doc):
     canvas.saveState()
     width, height = A4
 
+    # Header
+    canvas.setFont("Helvetica-Bold", 10)
+    canvas.drawString(30, height - 15, "Security Assessment Report")
+    canvas.drawRightString(width - 30, height - 15, datetime.now().strftime("%Y-%m-%d"))
+
     # Page border
     canvas.setStrokeColor(colors.black)
     canvas.setLineWidth(1)
@@ -194,6 +199,13 @@ def generate_pdf_report(
     story.append(Paragraph(executive_summary, styles["BodyText"]))
     story.append(Spacer(1, 0.15 * inch))
 
+    # Plain Text Explanation (Risk Narrative)
+    risk_narrative = analysis.get("risk_narrative")
+    if risk_narrative:
+        story.append(Paragraph("<b>Analysis & Risk Narrative:</b>", styles["CustomBodySmall"]))
+        story.append(Paragraph(_safe(risk_narrative), styles["CustomBodySmall"]))
+    story.append(Spacer(1, 0.15 * inch))
+
     # -----------------------------------------------------------------------
     # Score Summary
     # -----------------------------------------------------------------------
@@ -217,17 +229,25 @@ def generate_pdf_report(
     tcp_table = [["Probe", "Port", "Status", "Flags", "TTL", "Window", "Summary"]]
 
     if tcp_results:
-        for probe_name, result in tcp_results.items():
-            result = _safe_dict(result)
-            tcp_table.append([
-                _safe(probe_name),
-                _safe(result.get("port")),
-                _safe(result.get("status")),
-                _safe(result.get("flags")),
-                _safe(result.get("ttl")),
-                _safe(result.get("window_size")),
-                _safe(result.get("response_summary")),
-            ])
+        for probe_name, results_item in tcp_results.items():
+            if isinstance(results_item, dict):
+                items = [results_item]
+            elif isinstance(results_item, list):
+                items = results_item
+            else:
+                items = []
+
+            for result in items:
+                result = _safe_dict(result)
+                tcp_table.append([
+                    _safe(probe_name),
+                    _safe(result.get("port")),
+                    _safe(result.get("status")),
+                    _safe(result.get("flags")),
+                    _safe(result.get("ttl")),
+                    _safe(result.get("window_size")),
+                    _safe(result.get("response_summary")),
+                ])
     else:
         tcp_table.append(["No TCP probe data available", "-", "-", "-", "-", "-", "-"])
 
@@ -245,15 +265,23 @@ def generate_pdf_report(
     icmp_table = [["Probe", "Status / Verdict", "TTL", "RTT (ms)", "Summary"]]
 
     if icmp_results:
-        for probe_name, result in icmp_results.items():
-            result = _safe_dict(result)
-            icmp_table.append([
-                _safe(probe_name),
-                _safe(result.get("status") or result.get("verdict")),
-                _safe(result.get("ttl")),
-                _safe(result.get("response_time_ms") or result.get("avg_rtt_ms")),
-                _safe(result.get("response_summary")),
-            ])
+        for probe_name, results_item in icmp_results.items():
+            if isinstance(results_item, dict):
+                items = [results_item]
+            elif isinstance(results_item, list):
+                items = results_item
+            else:
+                items = []
+
+            for result in items:
+                result = _safe_dict(result)
+                icmp_table.append([
+                    _safe(probe_name),
+                    _safe(result.get("status") or result.get("verdict")),
+                    _safe(result.get("ttl")),
+                    _safe(result.get("response_time_ms") or result.get("avg_rtt_ms")),
+                    _safe(result.get("response_summary")),
+                ])
     else:
         icmp_table.append(["No ICMP probe data available", "-", "-", "-", "-"])
 
@@ -338,9 +366,14 @@ def generate_pdf_report(
 
     story.append(Paragraph("TCP Raw Results", styles["Heading3"]))
     if tcp_results:
-        for name, result in tcp_results.items():
+        for name, results_item in tcp_results.items():
             story.append(Paragraph(f"<b>{_safe(name)}</b>", styles["CustomBodySmall"]))
-            story.append(_make_table(_dict_to_table_rows(_safe_dict(result)), col_widths=[2.2 * inch, 4.2 * inch]))
+            if isinstance(results_item, list):
+                for res in results_item:
+                    story.append(_make_table(_dict_to_table_rows(_safe_dict(res)), col_widths=[2.2 * inch, 4.2 * inch]))
+                    story.append(Spacer(1, 0.05 * inch))
+            else:
+                story.append(_make_table(_dict_to_table_rows(_safe_dict(results_item)), col_widths=[2.2 * inch, 4.2 * inch]))
             story.append(Spacer(1, 0.12 * inch))
     else:
         story.append(Paragraph("No TCP raw data available.", styles["CustomBodySmall"]))
@@ -348,9 +381,14 @@ def generate_pdf_report(
     story.append(Spacer(1, 0.15 * inch))
     story.append(Paragraph("ICMP Raw Results", styles["Heading3"]))
     if icmp_results:
-        for name, result in icmp_results.items():
+        for name, results_item in icmp_results.items():
             story.append(Paragraph(f"<b>{_safe(name)}</b>", styles["CustomBodySmall"]))
-            story.append(_make_table(_dict_to_table_rows(_safe_dict(result)), col_widths=[2.2 * inch, 4.2 * inch]))
+            if isinstance(results_item, list):
+                for res in results_item:
+                    story.append(_make_table(_dict_to_table_rows(_safe_dict(res)), col_widths=[2.2 * inch, 4.2 * inch]))
+                    story.append(Spacer(1, 0.05 * inch))
+            else:
+                story.append(_make_table(_dict_to_table_rows(_safe_dict(results_item)), col_widths=[2.2 * inch, 4.2 * inch]))
             story.append(Spacer(1, 0.12 * inch))
     else:
         story.append(Paragraph("No ICMP raw data available.", styles["CustomBodySmall"]))
