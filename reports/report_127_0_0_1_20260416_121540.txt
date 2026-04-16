@@ -1,0 +1,173 @@
+
+========================================================================
+  Analysis of TCP/IP Stack Misconfigurations and Their Security Implications
+========================================================================
+  Generated At :                 2026-04-16T12:15:40.893054
+  Target       :                 127.0.0.1
+  Risk Level   :                 High  (Score: 5.3/10)
+
+  [ 1. TCP SYN PROBE RESULTS ]
+  --------------------------------------------------
+  Port     Service      Status                 TTL    WinSize    Summary
+  ----------------------------------------------------------------------
+  21       FTP          closed                 128    0          RST received — port closed
+  22       SSH          closed                 128    0          RST received — port closed
+  23       Telnet       closed                 128    0          RST received — port closed
+  25       SMTP         closed                 128    0          RST received — port closed
+  53       DNS          closed                 128    0          RST received — port closed
+  80       HTTP         closed                 128    0          RST received — port closed
+  110      POP3         closed                 128    0          RST received — port closed
+  139      NetBIOS      closed                 128    0          RST received — port closed
+  143      IMAP         closed                 128    0          RST received — port closed
+  443      HTTPS        closed                 128    0          RST received — port closed
+  445      SMB          open                   128    65535      SYN-ACK received — port open
+  8080     HTTP-Alt     closed                 128    0          RST received — port closed
+
+  [ 2. TCP ACK PROBE RESULTS (Firewall Detection) ]
+  --------------------------------------------------
+    • Port 21 (FTP): unfiltered — RST received — host reachable, filtering likely limited
+    • Port 22 (SSH): unfiltered — RST received — host reachable, filtering likely limited
+    • Port 23 (Telnet): unfiltered — RST received — host reachable, filtering likely limited
+    • Port 25 (SMTP): unfiltered — RST received — host reachable, filtering likely limited
+    • Port 53 (DNS): unfiltered — RST received — host reachable, filtering likely limited
+    • Port 80 (HTTP): unfiltered — RST received — host reachable, filtering likely limited
+    • Port 110 (POP3): unfiltered — RST received — host reachable, filtering likely limited
+    • Port 139 (NetBIOS): unfiltered — RST received — host reachable, filtering likely limited
+    • Port 143 (IMAP): unfiltered — RST received — host reachable, filtering likely limited
+    • Port 443 (HTTPS): unfiltered — RST received — host reachable, filtering likely limited
+    • Port 445 (SMB): unfiltered — RST received — host reachable, filtering likely limited
+    • Port 8080 (HTTP-Alt): unfiltered — RST received — host reachable, filtering likely limited
+
+  [ 3. MALFORMED TCP FLAG PROBES (Filter Evasion Assessment) ]
+  --------------------------------------------------
+  NULL Probes:
+    • Port 21: responded_rst — RST received — closed port or malformed packet handled
+    • Port 22: responded_rst — RST received — closed port or malformed packet handled
+    • Port 23: responded_rst — RST received — closed port or malformed packet handled
+    • Port 25: responded_rst — RST received — closed port or malformed packet handled
+    • Port 53: responded_rst — RST received — closed port or malformed packet handled
+    • Port 80: responded_rst — RST received — closed port or malformed packet handled
+  FIN Probes:
+    • Port 21: responded_rst — RST received — closed port
+    • Port 22: responded_rst — RST received — closed port
+    • Port 23: responded_rst — RST received — closed port
+    • Port 25: responded_rst — RST received — closed port
+    • Port 53: responded_rst — RST received — closed port
+    • Port 80: responded_rst — RST received — closed port
+  XMAS Probes:
+    • Port 21: responded_rst — RST received — malformed packets not silently dropped
+    • Port 22: responded_rst — RST received — malformed packets not silently dropped
+    • Port 23: responded_rst — RST received — malformed packets not silently dropped
+    • Port 25: responded_rst — RST received — malformed packets not silently dropped
+    • Port 53: responded_rst — RST received — malformed packets not silently dropped
+    • Port 80: responded_rst — RST received — malformed packets not silently dropped
+
+  [ 4. ICMP ANALYSIS ]
+  --------------------------------------------------
+    • Echo probe:      ICMP Echo Reply received — host reachable
+    • Timestamp probe: ICMP Timestamp Reply received — host may expose system clock information
+    • Rate limit test: Received 10/10 replies — no obvious ICMP rate limiting detected
+    • Repeated ICMP:   TTL remained stable and IPID progression appears monotonic
+
+  [ 5. FINGERPRINTING ]
+  --------------------------------------------------
+    • OS Fingerprint: Best match: Windows 10/11 (confidence: high) | TTL=128, WinSize=65535, Options=[MSS]
+    • IPID Analysis:  IPID increments predictably (mean_diff=16.75, variance=74.25). Pattern suggests system-load-based counter. Idle scan partially feasible.
+    • TCP Options:    Options order: MSS | MSS=65495
+
+  [ 6. ISN ENTROPY ANALYSIS ]
+  --------------------------------------------------
+    • Verdict:        high_entropy_random
+    • Entropy Score:  0.834 (0=predictable, 1=random)
+    • ISN Values:     [1427765637, 4140412618, 1147865150, 3656115017, 50358478, 638663354]
+    • ISN Diffs:      [1582320315, 1302419828, 1786717429, 689210757, 588304876]
+    • High ISN randomness (mean=1189794641, CV=0.448). Sequence prediction not feasible.
+
+  [ 7. SYN COOKIE DETECTION ]
+  --------------------------------------------------
+    • Verdict:       syn_cookies_likely_active
+    • Responded to 6/6 rapid SYN probes — SYN cookie protection likely active.
+
+  [ 8. FINDINGS ]
+  --------------------------------------------------
+    • ICMP echo replies enabled — host trivially discoverable
+    • Open ports: ['445 (SMB)']
+    • High-risk ports open: ['445 (SMB)'] — SSH/Telnet/SMB/FTP directly accessible
+    • OS fingerprinted: Windows 10/11 (confidence: high)
+    • IPID pattern: incremental_low_entropy — idle scan feasible. Host usable as zombie for anonymous port scanning.
+    • SYN cookie protection likely active — SYN flood resistance present
+    • No ICMP rate limiting — responded to 10/10 rapid probes. ICMP flood feasibility elevated.
+    • Malformed TCP probes received responses: ['NULL/21', 'NULL/22', 'NULL/23', 'NULL/25', 'NULL/53', 'NULL/80', 'FIN/21', 'FIN/22', 'FIN/23', 'FIN/25', 'FIN/53', 'FIN/80', 'XMAS/21', 'XMAS/22', 'XMAS/23', 'XMAS/25', 'XMAS/53', 'XMAS/80']. Stateful packet filtering absent — filter evasion techniques applicable.
+    • Unsolicited ACK probes returned RST on ports [21, 22, 23, 25, 53, 80, 110, 139, 143, 443, 445, 8080] — limited stateful filtering; firewall gap present
+
+  [ 9. ATTACK VECTOR MAP ]
+  --------------------------------------------------
+  ▶  Host Discovery
+       Reconnaissance phase — attacker confirms target before deeper probing
+  ▶  Port/Service Enumeration
+       Attacker identifies attack surface — each open port is a potential entry
+  ▶  OS Fingerprinting
+       Attacker selects OS-specific exploits and attack tooling
+  ▶  Idle Scan (Anonymous Scanning)
+       Attacker performs anonymous port scans, evading detection and attribution
+  ▶  ICMP Flood Feasibility
+       Bandwidth exhaustion or use as amplification reflector
+  ▶  Firewall / Filter Evasion
+       Attacker probes behind firewall using NULL/XMAS/FIN scans
+
+  [ 10. RISK NARRATIVE ]
+  --------------------------------------------------
+  6 offensive attack vector(s) confirmed through behavioral probing: Host Discovery, Port/Service Enumeration, OS Fingerprinting, Idle Scan (Anonymous Scanning), ICMP Flood Feasibility, Firewall / Filter Evasion. These misconfigurations are exploitable without any software vulnerabilities — purely through protocol behavior observation.
+
+  [ 11. SCORING BREAKDOWN ]
+  --------------------------------------------------
+  Final Score  :                 5.3 / 10
+  Risk Level   :                 High
+  Raw Score    :                 53 / 100
+
+  Triggered Factors:
+    [ 12pt]  IPID pattern: incremental_low_entropy — idle scan (anonymous scanning) enabled
+    [  8pt]  18 malformed TCP probes (NULL/FIN/XMAS) returned RST — stateful packet filter absent; filter evasion applicable
+    [  8pt]  Port 445 open — high-value service directly accessible
+    [  6pt]  No ICMP rate limiting — 0% response rate to burst
+    [  5pt]  OS confirmed as Windows 10/11 (high confidence)
+    [  5pt]  12 port(s) returned RST to unsolicited ACK — stateful filtering gap present
+    [  4pt]  ICMP echo replies active — host trivially discoverable
+    [  3pt]  TTL=128 confirms OS family — passive fingerprinting enabled
+    [  2pt]  TCP options fingerprint: MSS — partial OS identity leakage via options order
+
+  Scoring Method: Score is computed by summing offensive-impact weights for each confirmed misconfiguration, then normalizing to a 0-10 scale. Each weight reflects the degree of attacker capability enabled.
+
+  [ 12. MITIGATION RECOMMENDATIONS ]
+  --------------------------------------------------
+  [High] Predictable IPID — idle scan zombie feasibility
+  Fix: Modern Linux kernels (>= 3.x) use per-connection random IPID by default. Ensure the system is not running legacy kernel. Network-level mitigation: egress filtering via BCP38.
+
+  [High] Malformed TCP packets (NULL/FIN/XMAS) not dropped
+  Fix: Implement stateful packet inspection via iptables/nftables/pf. Rule: drop packets with illegal flag combinations. Linux: `iptables -A INPUT -p tcp --tcp-flags ALL NONE -j DROP` (NULL). For XMAS: `iptables -A INPUT -p tcp --tcp-flags ALL FIN,PSH,URG -j DROP`.
+
+  [High] High-risk service ports exposed
+  Fix: Disable unused services. Move SSH to non-standard port. Disable Telnet entirely — replace with SSH. Restrict SMB/NetBIOS to internal network only via firewall. Use allowlist-based firewall rules.
+
+  [Medium] No ICMP rate limiting — flood feasibility elevated
+  Fix: Linux: `sysctl net.ipv4.icmp_ratelimit=200` (200ms token bucket). Set `net.ipv4.icmp_ratemask` to include echo replies. Apply rate limiting at perimeter: `iptables -A INPUT -p icmp -m limit --limit 10/second -j ACCEPT`.
+
+  [Medium] OS identity confirmed through behavioral fingerprinting
+  Fix: Deploy packet normalization at perimeter (pf scrub, iptables NFQUEUE). Randomize or clamp TTL values at the firewall. Strip or randomize TCP options at the gateway. Consider OS fingerprint scrubbing tools (OpenBSD pf `scrub` directive).
+
+  [Medium] Unsolicited ACK packets reaching the host — stateful filtering gap
+  Fix: Configure stateful firewall (iptables conntrack): `iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT` `iptables -A INPUT -m state --state INVALID -j DROP`. Drop packets that don't belong to an existing connection.
+
+  [Low] ICMP echo replies enabled — host discoverable
+  Fix: Restrict ICMP echo on external interfaces: `sysctl net.ipv4.icmp_echo_ignore_all=1` or firewall rule. Allow ICMP only from trusted management networks.
+
+  [Low] TTL value reveals OS family
+  Fix: Normalize outgoing TTL at the firewall/gateway. pf: `scrub out all random-id min-ttl 64`. iptables: use NFQUEUE or MANGLE table to normalize TTL.
+
+  [Low] TCP options order leaks OS identity
+  Fix: Use traffic normalization at perimeter to strip or reorder TCP options. OpenBSD pf `scrub` rewrites TCP options. Application-layer proxies (nginx, HAProxy) terminate TCP and re-originate, masking underlying OS options.
+
+
+========================================================================
+  END OF REPORT
+========================================================================
