@@ -1,0 +1,862 @@
+{
+    "meta": {
+        "project": "Analysis of TCP/IP Stack Misconfigurations and Their Security Implications",
+        "generated_at": "2026-04-16T12:25:23.081373",
+        "target": "127.0.0.1",
+        "investigator": "Mr. RaviKant Kumar Nirala"
+    },
+    "probes": {
+        "tcp_syn": [
+            {
+                "probe_type": "TCP_SYN",
+                "port": 21,
+                "service": "FTP",
+                "status": "closed",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 37800,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 port closed"
+            },
+            {
+                "probe_type": "TCP_SYN",
+                "port": 22,
+                "service": "SSH",
+                "status": "closed",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 37809,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 port closed"
+            },
+            {
+                "probe_type": "TCP_SYN",
+                "port": 23,
+                "service": "Telnet",
+                "status": "closed",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 37816,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 port closed"
+            },
+            {
+                "probe_type": "TCP_SYN",
+                "port": 25,
+                "service": "SMTP",
+                "status": "closed",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 37825,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 port closed"
+            },
+            {
+                "probe_type": "TCP_SYN",
+                "port": 53,
+                "service": "DNS",
+                "status": "closed",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 37828,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 port closed"
+            },
+            {
+                "probe_type": "TCP_SYN",
+                "port": 80,
+                "service": "HTTP",
+                "status": "closed",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 37837,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 port closed"
+            },
+            {
+                "probe_type": "TCP_SYN",
+                "port": 110,
+                "service": "POP3",
+                "status": "closed",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 37846,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 port closed"
+            },
+            {
+                "probe_type": "TCP_SYN",
+                "port": 139,
+                "service": "NetBIOS",
+                "status": "closed",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 37855,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 port closed"
+            },
+            {
+                "probe_type": "TCP_SYN",
+                "port": 143,
+                "service": "IMAP",
+                "status": "closed",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 37862,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 port closed"
+            },
+            {
+                "probe_type": "TCP_SYN",
+                "port": 443,
+                "service": "HTTPS",
+                "status": "closed",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 37871,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 port closed"
+            },
+            {
+                "probe_type": "TCP_SYN",
+                "port": 445,
+                "service": "SMB",
+                "status": "open",
+                "flags": "SA",
+                "ttl": 128,
+                "window_size": 65535,
+                "ipid": 37880,
+                "tcp_options": [
+                    [
+                        "MSS",
+                        65495
+                    ]
+                ],
+                "response_summary": "SYN-ACK received \u2014 port open"
+            },
+            {
+                "probe_type": "TCP_SYN",
+                "port": 8080,
+                "service": "HTTP-Alt",
+                "status": "closed",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 37890,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 port closed"
+            }
+        ],
+        "tcp_ack": [
+            {
+                "probe_type": "TCP_ACK",
+                "port": 21,
+                "service": "FTP",
+                "status": "unfiltered",
+                "flags": "R",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 37899,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 host reachable, filtering likely limited"
+            },
+            {
+                "probe_type": "TCP_ACK",
+                "port": 22,
+                "service": "SSH",
+                "status": "unfiltered",
+                "flags": "R",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 37902,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 host reachable, filtering likely limited"
+            },
+            {
+                "probe_type": "TCP_ACK",
+                "port": 23,
+                "service": "Telnet",
+                "status": "unfiltered",
+                "flags": "R",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 37911,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 host reachable, filtering likely limited"
+            },
+            {
+                "probe_type": "TCP_ACK",
+                "port": 25,
+                "service": "SMTP",
+                "status": "unfiltered",
+                "flags": "R",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 37916,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 host reachable, filtering likely limited"
+            },
+            {
+                "probe_type": "TCP_ACK",
+                "port": 53,
+                "service": "DNS",
+                "status": "unfiltered",
+                "flags": "R",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 37925,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 host reachable, filtering likely limited"
+            },
+            {
+                "probe_type": "TCP_ACK",
+                "port": 80,
+                "service": "HTTP",
+                "status": "unfiltered",
+                "flags": "R",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 37934,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 host reachable, filtering likely limited"
+            },
+            {
+                "probe_type": "TCP_ACK",
+                "port": 110,
+                "service": "POP3",
+                "status": "unfiltered",
+                "flags": "R",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 37940,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 host reachable, filtering likely limited"
+            },
+            {
+                "probe_type": "TCP_ACK",
+                "port": 139,
+                "service": "NetBIOS",
+                "status": "unfiltered",
+                "flags": "R",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 37942,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 host reachable, filtering likely limited"
+            },
+            {
+                "probe_type": "TCP_ACK",
+                "port": 143,
+                "service": "IMAP",
+                "status": "unfiltered",
+                "flags": "R",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 37945,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 host reachable, filtering likely limited"
+            },
+            {
+                "probe_type": "TCP_ACK",
+                "port": 443,
+                "service": "HTTPS",
+                "status": "unfiltered",
+                "flags": "R",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 37954,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 host reachable, filtering likely limited"
+            },
+            {
+                "probe_type": "TCP_ACK",
+                "port": 445,
+                "service": "SMB",
+                "status": "unfiltered",
+                "flags": "R",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 37957,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 host reachable, filtering likely limited"
+            },
+            {
+                "probe_type": "TCP_ACK",
+                "port": 8080,
+                "service": "HTTP-Alt",
+                "status": "unfiltered",
+                "flags": "R",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 37966,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 host reachable, filtering likely limited"
+            }
+        ],
+        "tcp_null": [
+            {
+                "probe_type": "TCP_NULL",
+                "port": 21,
+                "service": "FTP",
+                "status": "responded_rst",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 37975,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 closed port or malformed packet handled"
+            },
+            {
+                "probe_type": "TCP_NULL",
+                "port": 22,
+                "service": "SSH",
+                "status": "responded_rst",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 38002,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 closed port or malformed packet handled"
+            },
+            {
+                "probe_type": "TCP_NULL",
+                "port": 23,
+                "service": "Telnet",
+                "status": "responded_rst",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 38023,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 closed port or malformed packet handled"
+            },
+            {
+                "probe_type": "TCP_NULL",
+                "port": 25,
+                "service": "SMTP",
+                "status": "responded_rst",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 38046,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 closed port or malformed packet handled"
+            },
+            {
+                "probe_type": "TCP_NULL",
+                "port": 53,
+                "service": "DNS",
+                "status": "responded_rst",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 38067,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 closed port or malformed packet handled"
+            },
+            {
+                "probe_type": "TCP_NULL",
+                "port": 80,
+                "service": "HTTP",
+                "status": "responded_rst",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 38088,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 closed port or malformed packet handled"
+            }
+        ],
+        "tcp_fin": [
+            {
+                "probe_type": "TCP_FIN",
+                "port": 21,
+                "service": "FTP",
+                "status": "responded_rst",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 37984,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 closed port"
+            },
+            {
+                "probe_type": "TCP_FIN",
+                "port": 22,
+                "service": "SSH",
+                "status": "responded_rst",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 38011,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 closed port"
+            },
+            {
+                "probe_type": "TCP_FIN",
+                "port": 23,
+                "service": "Telnet",
+                "status": "responded_rst",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 38032,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 closed port"
+            },
+            {
+                "probe_type": "TCP_FIN",
+                "port": 25,
+                "service": "SMTP",
+                "status": "responded_rst",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 38055,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 closed port"
+            },
+            {
+                "probe_type": "TCP_FIN",
+                "port": 53,
+                "service": "DNS",
+                "status": "responded_rst",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 38070,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 closed port"
+            },
+            {
+                "probe_type": "TCP_FIN",
+                "port": 80,
+                "service": "HTTP",
+                "status": "responded_rst",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 38097,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 closed port"
+            }
+        ],
+        "tcp_xmas": [
+            {
+                "probe_type": "TCP_XMAS",
+                "port": 21,
+                "service": "FTP",
+                "status": "responded_rst",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 37993,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 malformed packets not silently dropped"
+            },
+            {
+                "probe_type": "TCP_XMAS",
+                "port": 22,
+                "service": "SSH",
+                "status": "responded_rst",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 38020,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 malformed packets not silently dropped"
+            },
+            {
+                "probe_type": "TCP_XMAS",
+                "port": 23,
+                "service": "Telnet",
+                "status": "responded_rst",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 38041,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 malformed packets not silently dropped"
+            },
+            {
+                "probe_type": "TCP_XMAS",
+                "port": 25,
+                "service": "SMTP",
+                "status": "responded_rst",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 38058,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 malformed packets not silently dropped"
+            },
+            {
+                "probe_type": "TCP_XMAS",
+                "port": 53,
+                "service": "DNS",
+                "status": "responded_rst",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 38079,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 malformed packets not silently dropped"
+            },
+            {
+                "probe_type": "TCP_XMAS",
+                "port": 80,
+                "service": "HTTP",
+                "status": "responded_rst",
+                "flags": "RA",
+                "ttl": 128,
+                "window_size": 0,
+                "ipid": 38102,
+                "tcp_options": [],
+                "response_summary": "RST received \u2014 malformed packets not silently dropped"
+            }
+        ],
+        "icmp_echo": {
+            "probe_type": "ICMP_ECHO",
+            "status": "reachable",
+            "ttl": 128,
+            "ipid": 38266,
+            "icmp_type": 0,
+            "icmp_code": 0,
+            "response_time_ms": 440.83,
+            "response_summary": "ICMP Echo Reply received \u2014 host reachable"
+        },
+        "icmp_timestamp": {
+            "probe_type": "ICMP_TIMESTAMP",
+            "status": "timestamp_exposed",
+            "ttl": 128,
+            "ipid": 38276,
+            "icmp_type": 14,
+            "icmp_code": 0,
+            "response_time_ms": 37.33,
+            "response_summary": "ICMP Timestamp Reply received \u2014 host may expose system clock information"
+        },
+        "icmp_rate_limit": {
+            "probe_type": "ICMP_RATE_LIMIT",
+            "probes_sent": 10,
+            "responses_received": 10,
+            "loss_percent": 0.0,
+            "avg_rtt_ms": 510.19,
+            "verdict": "no_rate_limit_detected",
+            "response_summary": "Received 10/10 replies \u2014 no obvious ICMP rate limiting detected"
+        },
+        "repeated_icmp": {
+            "probe_type": "ICMP_REPEATED_ECHO_ANALYSIS",
+            "ttl_values": [
+                128,
+                128,
+                128,
+                128,
+                128
+            ],
+            "ipid_values": [
+                38374,
+                38378,
+                38392,
+                38402,
+                38412
+            ],
+            "ttl_stable": true,
+            "ipid_monotonic": true,
+            "verdict": "stable_stack_behavior",
+            "response_summary": "TTL remained stable and IPID progression appears monotonic"
+        },
+        "isn_analysis": {
+            "probe_type": "ISN_ENTROPY",
+            "port": 445,
+            "service": "SMB",
+            "isn_values": [
+                1473161612,
+                4020708166,
+                48690730,
+                1255267175,
+                3995104540,
+                3637314204
+            ],
+            "isn_diffs": [
+                1747420742,
+                322949860,
+                1206576445,
+                1555129931,
+                357790336
+            ],
+            "entropy_score": 0.892,
+            "verdict": "high_entropy_random",
+            "response_summary": "High ISN randomness (mean=1037973462, CV=0.641). Sequence prediction not feasible."
+        },
+        "syn_cookie": {
+            "probe_type": "SYN_COOKIE_DETECTION",
+            "port": 445,
+            "service": "SMB",
+            "responses_received": 6,
+            "syn_cookie_likely": true,
+            "verdict": "syn_cookies_likely_active",
+            "response_summary": "Responded to 6/6 rapid SYN probes \u2014 SYN cookie protection likely active."
+        }
+    },
+    "fingerprinting": {
+        "ipid_analysis": {
+            "ipid_values": [
+                38374,
+                38378,
+                38392,
+                38402,
+                38412
+            ],
+            "diffs": [
+                4,
+                14,
+                10,
+                10
+            ],
+            "mean_diff": 9.5,
+            "diff_variance": 17,
+            "pattern": "incremental_low_entropy",
+            "idle_scan_feasible": true,
+            "summary": "IPID increments predictably (mean_diff=9.5, variance=17). Pattern suggests system-load-based counter. Idle scan partially feasible."
+        },
+        "os_fingerprint": {
+            "best_match": "Windows 10/11",
+            "confidence": "high",
+            "os_family": "windows",
+            "all_scores": {
+                "Linux (kernel 3.x-5.x)": 4,
+                "Linux (kernel 6.x)": 4,
+                "Windows 10/11": 7,
+                "Windows Server 2016/2019": 7,
+                "FreeBSD / macOS": 4,
+                "Network Device (Cisco IOS)": 0
+            },
+            "signals": {
+                "ttl": 128,
+                "window_size": 65535,
+                "tcp_options": [
+                    [
+                        "MSS",
+                        65495
+                    ]
+                ],
+                "ttl_guess": "Windows (TTL~128)"
+            },
+            "fingerprint_summary": "Best match: Windows 10/11 (confidence: high) | TTL=128, WinSize=65535, Options=[MSS]"
+        },
+        "tcp_options": {
+            "options_raw": [
+                [
+                    "MSS",
+                    65495
+                ]
+            ],
+            "options_names": [
+                "MSS"
+            ],
+            "mss_value": 65495,
+            "wscale_value": null,
+            "sack_enabled": false,
+            "timestamps_enabled": false,
+            "fingerprint_string": "MSS",
+            "summary": "Options order: MSS | MSS=65495"
+        }
+    },
+    "analysis": {
+        "target": "127.0.0.1",
+        "findings": [
+            "ICMP echo replies enabled \u2014 host trivially discoverable",
+            "Open ports: ['445 (SMB)']",
+            "High-risk ports open: ['445 (SMB)'] \u2014 SSH/Telnet/SMB/FTP directly accessible",
+            "OS fingerprinted: Windows 10/11 (confidence: high)",
+            "IPID pattern: incremental_low_entropy \u2014 idle scan feasible. Host usable as zombie for anonymous port scanning.",
+            "SYN cookie protection likely active \u2014 SYN flood resistance present",
+            "No ICMP rate limiting \u2014 responded to 10/10 rapid probes. ICMP flood feasibility elevated.",
+            "Malformed TCP probes received responses: ['NULL/21', 'NULL/22', 'NULL/23', 'NULL/25', 'NULL/53', 'NULL/80', 'FIN/21', 'FIN/22', 'FIN/23', 'FIN/25', 'FIN/53', 'FIN/80', 'XMAS/21', 'XMAS/22', 'XMAS/23', 'XMAS/25', 'XMAS/53', 'XMAS/80']. Stateful packet filtering absent \u2014 filter evasion techniques applicable.",
+            "Unsolicited ACK probes returned RST on ports [21, 22, 23, 25, 53, 80, 110, 139, 143, 443, 445, 8080] \u2014 limited stateful filtering; firewall gap present"
+        ],
+        "attack_vectors": {
+            "host_discovery": {
+                "name": "Host Discovery",
+                "description": "Confirming the host is alive and reachable",
+                "attack": "Reconnaissance phase \u2014 attacker confirms target before deeper probing"
+            },
+            "port_enumeration": {
+                "name": "Port/Service Enumeration",
+                "description": "Mapping open services on the target",
+                "attack": "Attacker identifies attack surface \u2014 each open port is a potential entry"
+            },
+            "os_fingerprinting": {
+                "name": "OS Fingerprinting",
+                "description": "Identifying target operating system from stack behavior",
+                "attack": "Attacker selects OS-specific exploits and attack tooling"
+            },
+            "idle_scan": {
+                "name": "Idle Scan (Anonymous Scanning)",
+                "description": "Using predictable IPID to port scan without revealing true IP",
+                "attack": "Attacker performs anonymous port scans, evading detection and attribution"
+            },
+            "icmp_flood": {
+                "name": "ICMP Flood Feasibility",
+                "description": "Assessing ICMP flood and amplification potential",
+                "attack": "Bandwidth exhaustion or use as amplification reflector"
+            },
+            "filter_evasion": {
+                "name": "Firewall / Filter Evasion",
+                "description": "Bypassing packet filters using malformed TCP flags",
+                "attack": "Attacker probes behind firewall using NULL/XMAS/FIN scans"
+            }
+        },
+        "active_vector_ids": [
+            "host_discovery",
+            "port_enumeration",
+            "os_fingerprinting",
+            "idle_scan",
+            "icmp_flood",
+            "filter_evasion"
+        ],
+        "open_ports": [
+            445
+        ],
+        "closed_ports": [
+            21,
+            22,
+            23,
+            25,
+            53,
+            80,
+            110,
+            139,
+            143,
+            443,
+            8080
+        ],
+        "filtered_ports": [],
+        "high_risk_open": [
+            445
+        ],
+        "risk_narrative": "6 offensive attack vector(s) confirmed through behavioral probing: Host Discovery, Port/Service Enumeration, OS Fingerprinting, Idle Scan (Anonymous Scanning), ICMP Flood Feasibility, Firewall / Filter Evasion. These misconfigurations are exploitable without any software vulnerabilities \u2014 purely through protocol behavior observation."
+    },
+    "score": {
+        "normalized_score": 5.3,
+        "raw_score": 53,
+        "score_cap": 100,
+        "risk_level": "High",
+        "risk_color": "ORANGE",
+        "triggered": [
+            {
+                "factor": "ipid_predictable",
+                "weight": 12,
+                "reason": "IPID pattern: incremental_low_entropy \u2014 idle scan (anonymous scanning) enabled"
+            },
+            {
+                "factor": "malformed_flags_responded",
+                "weight": 8,
+                "reason": "18 malformed TCP probes (NULL/FIN/XMAS) returned RST \u2014 stateful packet filter absent; filter evasion applicable"
+            },
+            {
+                "factor": "open_high_risk_port",
+                "weight": 8,
+                "reason": "Port 445 open \u2014 high-value service directly accessible"
+            },
+            {
+                "factor": "icmp_no_rate_limit",
+                "weight": 6,
+                "reason": "No ICMP rate limiting \u2014 0% response rate to burst"
+            },
+            {
+                "factor": "os_fingerprinted",
+                "weight": 5,
+                "reason": "OS confirmed as Windows 10/11 (high confidence)"
+            },
+            {
+                "factor": "ack_unfiltered",
+                "weight": 5,
+                "reason": "12 port(s) returned RST to unsolicited ACK \u2014 stateful filtering gap present"
+            },
+            {
+                "factor": "icmp_echo_enabled",
+                "weight": 4,
+                "reason": "ICMP echo replies active \u2014 host trivially discoverable"
+            },
+            {
+                "factor": "ttl_exposes_os",
+                "weight": 3,
+                "reason": "TTL=128 confirms OS family \u2014 passive fingerprinting enabled"
+            },
+            {
+                "factor": "tcp_options_fingerprint",
+                "weight": 2,
+                "reason": "TCP options fingerprint: MSS \u2014 partial OS identity leakage via options order"
+            }
+        ],
+        "total_factors": 9,
+        "explanation": "Score is computed by summing offensive-impact weights for each confirmed misconfiguration, then normalizing to a 0-10 scale. Each weight reflects the degree of attacker capability enabled."
+    },
+    "mitigations": [
+        {
+            "issue": "Predictable IPID \u2014 idle scan zombie feasibility",
+            "fix": "Modern Linux kernels (>= 3.x) use per-connection random IPID by default. Ensure the system is not running legacy kernel. Network-level mitigation: egress filtering via BCP38.",
+            "severity": "High",
+            "factor": "ipid_predictable"
+        },
+        {
+            "issue": "Malformed TCP packets (NULL/FIN/XMAS) not dropped",
+            "fix": "Implement stateful packet inspection via iptables/nftables/pf. Rule: drop packets with illegal flag combinations. Linux: `iptables -A INPUT -p tcp --tcp-flags ALL NONE -j DROP` (NULL). For XMAS: `iptables -A INPUT -p tcp --tcp-flags ALL FIN,PSH,URG -j DROP`.",
+            "severity": "High",
+            "factor": "malformed_flags_responded"
+        },
+        {
+            "issue": "High-risk service ports exposed",
+            "fix": "Disable unused services. Move SSH to non-standard port. Disable Telnet entirely \u2014 replace with SSH. Restrict SMB/NetBIOS to internal network only via firewall. Use allowlist-based firewall rules.",
+            "severity": "High",
+            "factor": "open_high_risk_port"
+        },
+        {
+            "issue": "No ICMP rate limiting \u2014 flood feasibility elevated",
+            "fix": "Linux: `sysctl net.ipv4.icmp_ratelimit=200` (200ms token bucket). Set `net.ipv4.icmp_ratemask` to include echo replies. Apply rate limiting at perimeter: `iptables -A INPUT -p icmp -m limit --limit 10/second -j ACCEPT`.",
+            "severity": "Medium",
+            "factor": "icmp_no_rate_limit"
+        },
+        {
+            "issue": "OS identity confirmed through behavioral fingerprinting",
+            "fix": "Deploy packet normalization at perimeter (pf scrub, iptables NFQUEUE). Randomize or clamp TTL values at the firewall. Strip or randomize TCP options at the gateway. Consider OS fingerprint scrubbing tools (OpenBSD pf `scrub` directive).",
+            "severity": "Medium",
+            "factor": "os_fingerprinted"
+        },
+        {
+            "issue": "Unsolicited ACK packets reaching the host \u2014 stateful filtering gap",
+            "fix": "Configure stateful firewall (iptables conntrack): `iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT` `iptables -A INPUT -m state --state INVALID -j DROP`. Drop packets that don't belong to an existing connection.",
+            "severity": "Medium",
+            "factor": "ack_unfiltered"
+        },
+        {
+            "issue": "ICMP echo replies enabled \u2014 host discoverable",
+            "fix": "Restrict ICMP echo on external interfaces: `sysctl net.ipv4.icmp_echo_ignore_all=1` or firewall rule. Allow ICMP only from trusted management networks.",
+            "severity": "Low",
+            "factor": "icmp_echo_enabled"
+        },
+        {
+            "issue": "TTL value reveals OS family",
+            "fix": "Normalize outgoing TTL at the firewall/gateway. pf: `scrub out all random-id min-ttl 64`. iptables: use NFQUEUE or MANGLE table to normalize TTL.",
+            "severity": "Low",
+            "factor": "ttl_exposes_os"
+        },
+        {
+            "issue": "TCP options order leaks OS identity",
+            "fix": "Use traffic normalization at perimeter to strip or reorder TCP options. OpenBSD pf `scrub` rewrites TCP options. Application-layer proxies (nginx, HAProxy) terminate TCP and re-originate, masking underlying OS options.",
+            "severity": "Low",
+            "factor": "tcp_options_fingerprint"
+        }
+    ]
+}

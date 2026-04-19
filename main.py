@@ -115,6 +115,8 @@ def main():
         print("No target specified. Exiting.")
         sys.exit(1)
 
+    investigator = input("  Enter investigator name (optional): ").strip()
+
     timeout = TARGET_TIMEOUT
     ports   = COMMON_PORTS
 
@@ -232,6 +234,7 @@ def main():
         repeated_icmp, isn_analysis, syn_cookie,
         ipid_analysis, os_fingerprint, tcp_options_analysis,
         analysis, score_data, mitigations,
+        investigator=investigator,
     )
     _status(f"JSON → {json_path}")
     _status(f"TXT  → {txt_path}")
@@ -267,6 +270,7 @@ def main():
         fingerprint_results=fingerprint_results_dict,
         analysis=analysis,
         score_data=score_data,
+        investigator=investigator,
     )
     _status(f"PDF  → {pdf_path}")
 

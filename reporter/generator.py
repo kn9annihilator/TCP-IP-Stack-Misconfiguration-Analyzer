@@ -38,6 +38,7 @@ def generate(
     analysis,
     score_data,
     mitigations,
+    investigator="",
     output_dir="reports",
 ):
     os.makedirs(output_dir, exist_ok=True)
@@ -54,6 +55,7 @@ def generate(
             "project":      PROJECT_TITLE,
             "generated_at": _timestamp(),
             "target":       target,
+            "investigator": investigator,
         },
         "probes": {
             "tcp_syn":           syn_results,
@@ -106,6 +108,8 @@ def generate(
     h1(PROJECT_TITLE)
     row("Generated At :", _timestamp())
     row("Target       :", target)
+    if investigator:
+        row("Investigator :", investigator)
     row("Risk Level   :", f"{score_data['risk_level']}  "
                           f"(Score: {score_data['normalized_score']}/10)")
 

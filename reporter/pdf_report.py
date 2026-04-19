@@ -98,6 +98,7 @@ def generate_pdf_report(
     fingerprint_results=None,
     analysis=None,
     score_data=None,
+    investigator="",
     output_path=None,
 ):
     tcp_results = _safe_dict(tcp_results)
@@ -175,7 +176,7 @@ def generate_pdf_report(
         ["Target", _safe(target)],
         ["Generated On", datetime.now().strftime("%Y-%m-%d %H:%M:%S")],
         ["Report Type", "TCP/IP Stack Behavior & Misconfiguration Assessment"],
-        ["Analyst", "Automated Analyzer"],
+        ["Analyst", _safe(investigator, "Automated Analyzer") if investigator else "Automated Analyzer"],
     ]
     story.append(_make_table(target_info, col_widths=[2.0 * inch, 4.5 * inch]))
     story.append(Spacer(1, 0.25 * inch))
