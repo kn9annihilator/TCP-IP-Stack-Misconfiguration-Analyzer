@@ -1,6 +1,8 @@
 # reporter/pdf_report.py
 
 import os
+import platform
+import socket
 from datetime import datetime
 
 from reportlab.lib import colors
@@ -82,7 +84,7 @@ def _draw_page_border(canvas, doc):
 
     # Footer
     canvas.setFont("Helvetica", 8)
-    canvas.drawString(30, 15, "TCP/IP Stack Misconfiguration Analyzer Report")
+    canvas.drawString(20, 15, "TCP/IP Stack Misconfiguration Analyzer Report")
     canvas.drawRightString(width - 30, 15, f"Page {canvas.getPageNumber()}")
 
     canvas.restoreState()
@@ -162,24 +164,109 @@ def generate_pdf_report(
             spaceAfter=6,
         ))
 
+    if "CoverTitle" not in styles:
+        styles.add(ParagraphStyle(
+            name="CoverTitle",
+            parent=styles["Title"],
+            alignment=TA_CENTER,
+            fontName="Helvetica-Bold",
+            fontSize=22,
+            leading=28,
+            spaceAfter=6,
+            textColor=colors.HexColor("#1F4E78"),
+        ))
+
+    if "CoverSubtitle" not in styles:
+        styles.add(ParagraphStyle(
+            name="CoverSubtitle",
+            alignment=TA_CENTER,
+            fontName="Helvetica",
+            fontSize=12,
+            leading=16,
+            spaceAfter=4,
+            textColor=colors.HexColor("#444444"),
+        ))
+
+    if "CoverLabel" not in styles:
+        styles.add(ParagraphStyle(
+            name="CoverLabel",
+            alignment=TA_CENTER,
+            fontName="Helvetica",
+            fontSize=9,
+            leading=13,
+            textColor=colors.HexColor("#888888"),
+        ))
+
+    # -----------------------------------------------------------------------
+    # Collect system environment details for the cover page
+    # -----------------------------------------------------------------------
+    now = datetime.now()
+    generated_at   = now.strftime("%Y-%m-%d  %H:%M:%S")
+    analyst_name   = investigator.strip() if investigator and investigator.strip() else "Automated Analyzer"
+    risk_level     = _safe(score_data.get("risk_level",       score_data.get("severity", "N/A")))
+    risk_score     = _safe(score_data.get("normalized_score", score_data.get("overall_score", "N/A")))
+
+    try:
+        analyst_host = socket.gethostname()
+    except Exception:
+        analyst_host = "Unknown Host"
+
+    try:
+        analyst_ip = socket.gethostbyname(analyst_host)
+    except Exception:
+        analyst_ip = "Unknown"
+
+    sys_os      = f"{platform.system()} {platform.release()} ({platform.machine()})"
+    sys_python  = platform.python_version()
+
     story = []
 
     # -----------------------------------------------------------------------
-    # Title / Header
+    # Cover Page
     # -----------------------------------------------------------------------
-    story.append(Paragraph("TCP/IP Stack Misconfiguration Analyzer", styles["CustomTitleCenter"]))
-    story.append(Paragraph("Structured Security Assessment Report", styles["Heading2"]))
-    story.append(Spacer(1, 0.15 * inch))
+    story.append(Spacer(1, 1.2 * inch))
 
-    target_info = [
-        ["Field", "Value"],
-        ["Target", _safe(target)],
-        ["Generated On", datetime.now().strftime("%Y-%m-%d %H:%M:%S")],
-        ["Report Type", "TCP/IP Stack Behavior & Misconfiguration Assessment"],
-        ["Analyst", _safe(investigator, "Automated Analyzer") if investigator else "Automated Analyzer"],
+    story.append(Paragraph("TCP/IP Stack Misconfiguration Analyzer", styles["CoverTitle"]))
+    story.append(Spacer(1, 0.1 * inch))
+    story.append(Paragraph("Structured Security Assessment Report", styles["CoverSubtitle"]))
+    story.append(Spacer(1, 0.06 * inch))
+    story.append(Paragraph("For authorized use only", styles["CoverLabel"]))
+    story.append(Spacer(1, 0.5 * inch))
+
+    # Horizontal rule
+    rule_table = Table([[""]], colWidths=[6.5 * inch], rowHeights=[2])
+    rule_table.setStyle(TableStyle([
+        ("LINEABOVE",  (0, 0), (-1, 0), 1.5, colors.HexColor("#1F4E78")),
+        ("LINEBELOW",  (0, 0), (-1, 0), 0.5, colors.HexColor("#AAAAAA")),
+    ]))
+    story.append(rule_table)
+    story.append(Spacer(1, 0.35 * inch))
+
+    cover_rows = [
+        ["Field",                  "Details"],
+        ["Target IP / Host",       _safe(target)],
+        ["Risk Level",             f"{risk_level}  (Score: {risk_score} / 10)"],
+        ["Report Generated On",    generated_at],
+        ["Investigator / Analyst", analyst_name],
+        ["Analyst Workstation",    analyst_host],
+        ["Analyst IP",             analyst_ip],
+        ["Operating System",       sys_os],
+        ["Python Version",         sys_python],
+        ["Report Classification",  "Confidential — Authorized Testing Only"],
     ]
-    story.append(_make_table(target_info, col_widths=[2.0 * inch, 4.5 * inch]))
-    story.append(Spacer(1, 0.25 * inch))
+    story.append(_make_table(cover_rows, col_widths=[2.3 * inch, 4.2 * inch]))
+    story.append(Spacer(1, 0.5 * inch))
+
+    story.append(rule_table)
+    story.append(Spacer(1, 0.3 * inch))
+    story.append(Paragraph(
+        "This document is generated automatically by the TCP/IP Stack Misconfiguration Analyzer. "
+        "All findings are based on live network probe responses. "
+        "Distribution of this report outside authorized personnel is prohibited.",
+        styles["CoverLabel"],
+    ))
+
+    story.append(PageBreak())
 
     # -----------------------------------------------------------------------
     # Executive Summary
