@@ -36,7 +36,7 @@ LOW_RISK_PORTS  = [53, 80, 110, 143, 443, 8080]
 # --- Weighted scoring model ---
 # Each weight represents the offensive capability that misconfiguration enables.
 # Higher = more dangerous from an attacker's perspective.
-#
+#...
 # Scale: 0-100 total risk budget
 # These weights are used additively; final score is normalized to 0-10.
 
